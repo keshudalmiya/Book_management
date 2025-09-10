@@ -1,29 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-const GENRES = [
-  "FANTASY",
-  "SCIENCE FICTION",
-  "DYSTOPIAN",
-  "ADVENTURE",
-  "ROMANCE",
-  "MYSTERY",
-  "HORROR",
-  "THRILLER",
-  "HISTORICAL FICTION",
-  "YOUNG ADULT (YA)",
-  "CHILDREN'S FICTION",
-  "OTHERS"
-];
-
-const getYearOptions = () => {
-  const currentYear = new Date().getFullYear();
-  const years = [];
-  for (let y = currentYear; y >= 1900; y--) {
-    years.push(y);
-  }
-  return years;
-};
-
 const BookForm = ({ onSubmit, editingBook, onCancel }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -71,28 +47,18 @@ const BookForm = ({ onSubmit, editingBook, onCancel }) => {
         onChange={e => setAuthor(e.target.value)}
         required
       />
-      <select
+      <input
+        placeholder="Genre"
         value={genre}
         onChange={e => setGenre(e.target.value)}
         required
-        className="genre-select"
-      >
-        <option value="">Select Genre</option>
-        {GENRES.map(g => (
-          <option key={g} value={g}>{g}</option>
-        ))}
-      </select>
-      <select
+      />
+      <input
+        placeholder="Published Year"
         value={publishedYear}
         onChange={e => setPublishedYear(e.target.value)}
         required
-        className="year-select"
-      >
-        <option value="">Select Year</option>
-        {getYearOptions().map(year => (
-          <option key={year} value={year}>{year}</option>
-        ))}
-      </select>
+      />
       <input
         placeholder="ISBN"
         value={isbn}
